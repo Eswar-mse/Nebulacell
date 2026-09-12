@@ -22,7 +22,7 @@ Spatial transcriptomics data couples gene expression with physical tissue coordi
 - **Natural language query filtering**: type queries like `show cells with high Xkr4` or `show cluster 3` to highlight matching cells; a rule-based parser (no LLM API cost) validates against the actual dataset schema before applying any filter.
 - **Real-world `.h5ad` loading**: point it at any spatial `.h5ad` file via a path input; automatically chooses in-memory vs. backed-mode loading based on actual matrix size (cells × genes), not cell count alone.
 
-## Screenshots
+## Instances
 
 | Leiden clusters + histology overlay | HDBSCAN spatial domains (827k cells) |
 |---|---|
