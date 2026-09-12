@@ -1,0 +1,11 @@
+scanpy
+squidpy
+hdbscan
+dash
+plotly
+anndata
+zarr
+anthropic
+structlogo
+
+Pillow

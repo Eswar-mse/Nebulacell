@@ -1,0 +1,19 @@
+# Virtual environment (this venv currently lives inside nebulacell/ itself)
+bin/
+lib/
+lib64/
+include/
+share/
+pyvenv.cfg
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Data files (large — don't commit datasets to git)
+data/anndata/*.h5ad
+
+# OS/editor junk
+.DS_Store
+*.swp
