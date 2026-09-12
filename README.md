@@ -1,6 +1,6 @@
 # NebulaCell
 
-**Spatial transcriptomics visualization engine** — an interactive, GPU-accelerated dashboard for exploring spatial single-cell/spot data, with density-based tissue domain discovery and natural-language filtering.
+**Spatial transcriptomics visualization engine**, an interactive, GPU-accelerated dashboard for exploring spatial single-cell/spot data, with density-based tissue domain discovery and natural-language filtering.
 
 ![Hero](nebulacell/docs/images/hero.png)
 
@@ -14,13 +14,13 @@ Spatial transcriptomics data couples gene expression with physical tissue coordi
 
 ## Features
 
-- **GPU-accelerated spatial rendering** (WebGL via Plotly `Scattergl`) — tested up to 827,000 cells without the browser choking, something plain SVG-based scatter plots can't handle past ~10-20k points.
-- **Histology image overlay** — automatically extracts and aligns the tissue image from Visium-style `.h5ad` files (`adata.uns['spatial']`), correctly scaled to match spot coordinates. Degrades gracefully for imaging-based assays (MERFISH, Xenium) that have no histology image.
-- **Dual clustering views** — toggle between expression-based Leiden clusters (if present in the dataset) and independently-computed HDBSCAN spatial domains.
-- **Adaptive HDBSCAN tuning** — default clustering parameters auto-scale to dataset size, with a live "Recluster" control to tune `min_cluster_size`/`min_samples` and re-run instantly without reloading data.
-- **Live gene expression exploration** — a searchable gene dropdown recolors the entire dataset by any gene's expression, and hover tooltips show each cell's top-expressed genes plus the selected gene's value.
-- **Natural language query filtering** — type queries like `show cells with high Xkr4` or `show cluster 3` to highlight matching cells; a rule-based parser (no LLM API cost) validates against the actual dataset schema before applying any filter.
-- **Real-world `.h5ad` loading** — point it at any spatial `.h5ad` file via a path input; automatically chooses in-memory vs. backed-mode loading based on actual matrix size (cells × genes), not cell count alone.
+- **GPU-accelerated spatial rendering** (WebGL via Plotly `Scattergl`): tested up to 827,000 cells without the browser choking, something plain SVG-based scatter plots can't handle past ~10-20k points.
+- **Histology image overlay**: automatically extracts and aligns the tissue image from Visium-style `.h5ad` files (`adata.uns['spatial']`), correctly scaled to match spot coordinates. Degrades gracefully for imaging-based assays (MERFISH, Xenium) that have no histology image.
+- **Dual clustering views**: toggle between expression-based Leiden clusters (if present in the dataset) and independently-computed HDBSCAN spatial domains.
+- **Adaptive HDBSCAN tuning**: default clustering parameters auto-scale to dataset size, with a live "Recluster" control to tune `min_cluster_size`/`min_samples` and re-run instantly without reloading data.
+- **Live gene expression exploration**: a searchable gene dropdown recolors the entire dataset by any gene's expression, and hover tooltips show each cell's top-expressed genes plus the selected gene's value.
+- **Natural language query filtering**: type queries like `show cells with high Xkr4` or `show cluster 3` to highlight matching cells; a rule-based parser (no LLM API cost) validates against the actual dataset schema before applying any filter.
+- **Real-world `.h5ad` loading**: point it at any spatial `.h5ad` file via a path input; automatically chooses in-memory vs. backed-mode loading based on actual matrix size (cells × genes), not cell count alone.
 
 ## Screenshots
 
