@@ -33,23 +33,26 @@
 
 <img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
 
+
 ### DOCUMENTATION
 <br/>
 
-<a href="#what-is-nebulacell"><img src="https://img.shields.io/badge/WHAT_IS_NEBULACELL-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="What is NebulaCell"/></a>
-<a href="#gallery"><img src="https://img.shields.io/badge/GALLERY-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Gallery"/></a>
-<a href="#how-it-works"><img src="https://img.shields.io/badge/HOW_IT_WORKS-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="How it works"/></a>
-<a href="#features"><img src="https://img.shields.io/badge/FEATURES-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Features"/></a>
-<a href="#quick-start"><img src="https://img.shields.io/badge/QUICK_START-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Quick start"/></a>
-<a href="#natural-language-queries"><img src="https://img.shields.io/badge/NL_QUERIES-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="NL queries"/></a>
-<a href="#supported-assays"><img src="https://img.shields.io/badge/ASSAYS-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Assays"/></a>
-<a href="#architecture"><img src="https://img.shields.io/badge/ARCHITECTURE-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Architecture"/></a>
-<a href="#limitations-and-roadmap"><img src="https://img.shields.io/badge/LIMITATIONS-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Limitations"/></a>
-<a href="#contributing"><img src="https://img.shields.io/badge/CONTRIBUTING-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Contributing"/></a>
-<a href="#citation"><img src="https://img.shields.io/badge/CITATION-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Citation"/></a>
-<a href="#author"><img src="https://img.shields.io/badge/AUTHOR-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Author"/></a>
+<a href="#what-is-nebulacell"><img src="https://img.shields.io/badge/WHAT_IS_NEBULACELL-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="What is NebulaCell"/></a>
+<a href="#how-it-works"><img src="https://img.shields.io/badge/HOW_IT_WORKS-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="How it works"/></a>
+<a href="#architecture"><img src="https://img.shields.io/badge/ARCHITECTURE-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Architecture"/></a>
+<a href="#quick-start"><img src="https://img.shields.io/badge/QUICK_START-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Quick start"/></a>
+<a href="#features"><img src="https://img.shields.io/badge/FEATURES-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Features"/></a>
+<a href="#natural-language-queries"><img src="https://img.shields.io/badge/NATURAL_LANGUAGE_QUERIES-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Natural language queries"/></a>
+<a href="#supported-assays"><img src="https://img.shields.io/badge/SUPPORTED_ASSAYS-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Supported assays"/></a>
+<a href="#gallery"><img src="https://img.shields.io/badge/GALLERY-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Gallery"/></a>
+
+<a href="#limitations-and-roadmap"><img src="https://img.shields.io/badge/LIMITATIONS_AND_ROADMAP-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Limitations and roadmap"/></a>
+<a href="#contributing"><img src="https://img.shields.io/badge/CONTRIBUTING-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Contributing"/></a>
+<a href="#citation"><img src="https://img.shields.io/badge/CITATION-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Citation"/></a>
+<a href="#author"><img src="https://img.shields.io/badge/AUTHOR-0F1E3D?style=flat-square&labelColor=0A1224&color=0F1E3D" alt="Author"/></a>
 
 </div>
+
 
 <img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
 
