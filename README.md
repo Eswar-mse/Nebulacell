@@ -106,19 +106,70 @@ HDBSCAN is a density-based clustering method. Instead of asking you for the numb
 <div align="center">
 <h3>ARCHITECTURE</h3>
 </div>
-
-| Layer | Technology |
-| :--- | :--- |
-| Dashboard / UI | Dash (Plotly) |
-| Rendering | Plotly `Scattergl` (WebGL) |
-| Data handling | Scanpy, AnnData |
-| Spatial data | Squidpy |
-| Clustering | HDBSCAN |
-| NL query parsing | Rule-based regex parser, no external API |
-
+**In plain terms.** NebulaCell is split into four layers, each doing one job. Data goes in on the left, gets prepared and analysed, is wired together by the Dash app, and comes out as a GPU-drawn plot in your browser.
+ 
+```mermaid
+flowchart LR
+    U(["YOU<br/>gene dropdown · query box · Recluster"])
+    F[("spatial .h5ad<br/>Visium · MERFISH · Xenium")]
+ 
+    subgraph DATA ["1 · DATA LAYER  ·  Scanpy · AnnData · Squidpy"]
+        direction TB
+        LD["loader.py<br/>in-memory or backed loading"]
+        IM["image_overlay.py<br/>Visium histology image"]
+    end
+ 
+    subgraph LOGIC ["2 · ANALYSIS LAYER"]
+        direction TB
+        HD["hdbscan_runner.py<br/>spatial domains · HDBSCAN"]
+        NL["parser.py<br/>NL query to validated filter<br/>rule-based · no API"]
+        HV["hover.py<br/>top genes · expression lookup"]
+    end
+ 
+    subgraph UI ["3 · APP LAYER  ·  Dash"]
+        MAIN["main.py<br/>layout + callbacks"]
+    end
+ 
+    subgraph GPU ["4 · RENDER LAYER  ·  WebGL"]
+        PLOT[/"Plotly Scattergl<br/>tested to 827k cells"/]
+    end
+ 
+    F --> LD
+    LD --> IM
+    LD --> HD
+    LD --> NL
+    LD --> HV
+    IM --> MAIN
+    HD --> MAIN
+    NL --> MAIN
+    HV --> MAIN
+    U <--> MAIN
+    MAIN --> PLOT
+ 
+    classDef box fill:#0A1224,stroke:#2563EB,color:#93C5FD
+    classDef hot fill:#0F1E3D,stroke:#3B82F6,color:#BFDBFE
+    class F,LD,IM,HD,NL,HV,MAIN,PLOT box
+    class U hot
+    style DATA fill:#050B1A,stroke:#1D4ED8,stroke-dasharray:4 4,color:#60A5FA
+    style LOGIC fill:#050B1A,stroke:#1D4ED8,stroke-dasharray:4 4,color:#60A5FA
+    style UI fill:#050B1A,stroke:#1D4ED8,stroke-dasharray:4 4,color:#60A5FA
+    style GPU fill:#050B1A,stroke:#1D4ED8,stroke-dasharray:4 4,color:#60A5FA
+    linkStyle default stroke:#3B82F6,stroke-width:1.5px
+```
+ 
+**Under the hood.** Every module reads from the same loaded dataset, so a gene you pick, a cluster you filter and a domain you recompute all stay in sync on one plot.
+ 
+<p align="center">
+  <img src="https://img.shields.io/badge/Dash-Plotly-1D4ED8?style=flat-square&labelColor=0A1224&logo=plotly&logoColor=white" alt="Dash"/>
+  <img src="https://img.shields.io/badge/render-Scattergl%20WebGL-1D4ED8?style=flat-square&labelColor=0A1224" alt="Scattergl"/>
+  <img src="https://img.shields.io/badge/data-Scanpy%20%C2%B7%20AnnData-1D4ED8?style=flat-square&labelColor=0A1224" alt="Scanpy and AnnData"/>
+  <img src="https://img.shields.io/badge/spatial-Squidpy-1D4ED8?style=flat-square&labelColor=0A1224" alt="Squidpy"/>
+  <img src="https://img.shields.io/badge/clustering-HDBSCAN-1D4ED8?style=flat-square&labelColor=0A1224" alt="HDBSCAN"/>
+  <img src="https://img.shields.io/badge/NL%20parsing-regex%2C%20no%20API-1D4ED8?style=flat-square&labelColor=0A1224" alt="Regex parser, no external API"/>
+</p>
 <details>
 <summary><b>Project layout</b></summary>
-
+  
 ```text
 nebulacell/
 ├── app/
@@ -134,27 +185,9 @@ nebulacell/
 │       └── parser.py            NL to structured filter parsing + validation
 └── tests/
 ```
-
+ 
 </details>
-
 <img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
-
-<div align="center">
-<h3>FEATURES</h3>
-</div>
-
-| | Feature | What you get |
-| :---: | :--- | :--- |
-| ⚡ | **GPU-accelerated rendering** | WebGL via Plotly `Scattergl`, tested up to 827,000 cells |
-| 🔬 | **Histology overlay** | Tissue image extracted from Visium-style `.h5ad` files (`adata.uns['spatial']`) and scaled to match spot coordinates. Degrades gracefully for MERFISH and Xenium, which have no histology image |
-| 🧭 | **Dual clustering views** | Expression-based Leiden clusters (if present in the file) next to independently computed HDBSCAN spatial domains |
-| 🎛️ | **Adaptive HDBSCAN** | Defaults scale with dataset size, plus a live **Recluster** control |
-| 🧬 | **Live gene exploration** | Searchable gene dropdown recolours the whole dataset. Hover tooltips show each cell's top-expressed genes and the selected gene's value |
-| 💬 | **Natural-language filtering** | Type `show cells with high Xkr4` or `show cluster 3`. A rule-based parser, with no LLM API cost, validates against the dataset before filtering |
-| 📂 | **Real `.h5ad` loading** | Point it at any spatial `.h5ad` file through a path input |
-
-<img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
-
 <div align="center">
 <h3>QUICK START</h3>
 </div>
@@ -179,8 +212,25 @@ Open **http://127.0.0.1:8050** in your browser. NebulaCell starts with a small b
 <img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
 
 <div align="center">
-<h3>NATURAL-LANGUAGE QUERIES</h3>
+<h3>FEATURES</h3>
 </div>
+
+| | Feature | What you get |
+| :---: | :--- | :--- |
+| ⚡ | **GPU-accelerated rendering** | WebGL via Plotly `Scattergl`, tested up to 827,000 cells |
+| 🔬 | **Histology overlay** | Tissue image extracted from Visium-style `.h5ad` files (`adata.uns['spatial']`) and scaled to match spot coordinates. Degrades gracefully for MERFISH and Xenium, which have no histology image |
+| 🧭 | **Dual clustering views** | Expression-based Leiden clusters (if present in the file) next to independently computed HDBSCAN spatial domains |
+| 🎛️ | **Adaptive HDBSCAN** | Defaults scale with dataset size, plus a live **Recluster** control |
+| 🧬 | **Live gene exploration** | Searchable gene dropdown recolours the whole dataset. Hover tooltips show each cell's top-expressed genes and the selected gene's value |
+| 💬 | **Natural-language filtering** | Type `show cells with high Xkr4` or `show cluster 3`. A rule-based parser, with no LLM API cost, validates against the dataset before filtering |
+| 📂 | **Real `.h5ad` loading** | Point it at any spatial `.h5ad` file through a path input |
+
+<img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
+
+
+<div align="center">
+<h3>NATURAL-LANGUAGE QUERIES</h3>
+
 <a id="natural-language-queries"></a>
 
 **In plain terms.** Type a sentence into the query box and the matching cells light up.
@@ -191,6 +241,7 @@ Open **http://127.0.0.1:8050** in your browser. NebulaCell starts with a small b
 | `show cluster 3` | Highlights the cells that belong to cluster 3 |
 
 **Under the hood.** A rule-based regex parser turns your sentence into a structured filter and **checks it against the loaded dataset** (does that gene exist? does that cluster exist?) before anything is applied. There is no model call, so it costs nothing, behaves the same every time, and cannot hallucinate.
+</div>
 
 > [!IMPORTANT]
 > The grammar is deliberately narrow. It covers gene-expression-level and cluster-membership queries, and it is not a general-purpose language interface.
@@ -199,7 +250,7 @@ Open **http://127.0.0.1:8050** in your browser. NebulaCell starts with a small b
 
 <div align="center">
 <h3>SUPPORTED ASSAYS</h3>
-</div>
+
 <a id="supported-assays"></a>
 
 | Assay | Type | Histology overlay | Verified in this project |
@@ -207,6 +258,7 @@ Open **http://127.0.0.1:8050** in your browser. NebulaCell starts with a small b
 | **Visium** | Spot-based, with a tissue image | ✓ | Built-in demo: mouse brain, 2,800 cells |
 | **MERFISH** | Imaging-based | none in file | Stress-tested on real public data |
 | **Xenium** | Imaging-based | none in file | 827,048 cells, human lung |
+</div>
 
 > [!WARNING]
 > Gene identifiers come from the source file. Some public datasets (certain Xenium exports, for example) store Ensembl IDs instead of gene symbols. NebulaCell shows whatever the file provides.
@@ -300,5 +352,3 @@ If NebulaCell helps your research, please cite it:
 [Portfolio](https://eswar-mse.github.io) · [ORCID 0009-0005-4635-7368](https://orcid.org/0009-0005-4635-7368) · [GitHub @Eswar-mse](https://github.com/Eswar-mse)
 
 If NebulaCell saves you time, a :star: on GitHub helps other researchers find it. Released under the [MIT license](LICENSE).
-
-<img src="https://capsule-render.vercel.app/api?type=waving&height=100&color=0:020617,50:1D4ED8,100:020617&section=footer" alt="" width="100%"/>
