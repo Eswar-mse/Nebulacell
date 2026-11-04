@@ -17,7 +17,6 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1D4ED8?style=flat-square&labelColor=0A1224" alt="License: MIT"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10%2B-1D4ED8?style=flat-square&labelColor=0A1224&logo=python&logoColor=white" alt="Python"></a>
-  <a href="https://github.com/Eswar-mse/Nebulacell/actions"><img src="https://img.shields.io/github/actions/workflow/status/Eswar-mse/Nebulacell/ci.yml?branch=main&style=flat-square&labelColor=0A1224&label=tests&logo=githubactions&logoColor=white" alt="Tests"></a>
   <a href="https://github.com/Eswar-mse/Nebulacell/commits/main"><img src="https://img.shields.io/github/last-commit/Eswar-mse/Nebulacell?style=flat-square&color=1D4ED8&labelColor=0A1224&logo=git&logoColor=white" alt="Last commit"></a>
   <a href="https://github.com/Eswar-mse/Nebulacell/stargazers"><img src="https://img.shields.io/github/stars/Eswar-mse/Nebulacell?style=flat-square&color=1D4ED8&labelColor=0A1224&logo=github&logoColor=white" alt="Stars"></a>
   <a href="https://github.com/Eswar-mse/Nebulacell/network/members"><img src="https://img.shields.io/github/forks/Eswar-mse/Nebulacell?style=flat-square&color=1D4ED8&labelColor=0A1224&logo=github&logoColor=white" alt="Forks"></a>
@@ -34,6 +33,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
 
+### DOCUMENTATION
 <br/>
 
 <a href="#what-is-nebulacell"><img src="https://img.shields.io/badge/WHAT_IS_NEBULACELL-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="What is NebulaCell"/></a>
@@ -48,10 +48,6 @@
 <a href="#contributing"><img src="https://img.shields.io/badge/CONTRIBUTING-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Contributing"/></a>
 <a href="#citation"><img src="https://img.shields.io/badge/CITATION-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Citation"/></a>
 <a href="#author"><img src="https://img.shields.io/badge/AUTHOR-0F1E3D?style=flat-square&labelColor=0F1E3D&color=0F1E3D" alt="Author"/></a>
-
-<br/><br/>
-
-<img src="nebulacell/docs/images/hero.png" alt="NebulaCell dashboard: Leiden clusters over a Visium histology image" width="100%"/>
 
 </div>
 
