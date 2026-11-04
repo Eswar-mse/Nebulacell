@@ -1,8 +1,12 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:020617,50:1D4ED8,100:020617&section=header" alt="" width="100%"/>
+<!-- visual slot: banner -->
 
-# NEBULACELL
+<div align="center">
+  <img src="visual_assets/Nebulacell_banner.gif" /> 
+</div> 
+<div>&nbsp;
+</div> 
 
 <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=500&size=22&pause=150000&color=60A5FA&center=true&vCenter=true&width=1000&height=30&lines=SPATIAL+TRANSCRIPTOMICS+%C2%B7+827%2C000%2B+CELLS+%C2%B7+ZERO+API+COST" alt="NebulaCell tagline"/>
 
