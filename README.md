@@ -56,6 +56,7 @@
 <div align="center">
 <h3>WHAT IS NEBULACELL</h3>
 </div>
+<img align="right" width="310" src="visual_assets/Neon Spatial Tissue Analysis Dashboard.png"/>
 
 **NebulaCell** is an interactive, GPU-accelerated dashboard for exploring spatial single-cell and spot data. Load a real `.h5ad` file, look at it in your browser, recolour it by any gene, find tissue domains by density, and ask questions in plain language, all in one tab and without a notebook.
 
@@ -63,42 +64,6 @@ Spatial transcriptomics couples gene expression with physical tissue coordinates
 
 > [!NOTE]
 > **In plain terms.** A normal single-cell experiment tells you *what* each cell expresses. A spatial one also tells you *where* the cell sits in the tissue. NebulaCell draws every cell at its x/y position, so you can see tissue structure and its gene activity together.
-
-<img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
-
-<div align="center">
-<h3>GALLERY</h3>
-</div>
-<a id="gallery"></a>
-
-<table>
-<tr>
-<td width="50%" valign="top" align="center">
-<b>Leiden clusters + histology overlay</b><br/>
-<img src="nebulacell/docs/images/hero.png" alt="Leiden clusters with histology overlay"/>
-</td>
-<td width="50%" valign="top" align="center">
-<b>HDBSCAN spatial domains (827k cells)</b><br/>
-<img src="nebulacell/docs/images/hdbscan-domains.png" alt="HDBSCAN spatial domains on 827k cells"/>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top" align="center">
-<b>Gene expression colouring</b><br/>
-<img src="nebulacell/docs/images/gene-expression.png" alt="Dataset recoloured by gene expression"/>
-</td>
-<td width="50%" valign="top" align="center">
-<b>Natural-language query filtering</b><br/>
-<img src="nebulacell/docs/images/nl-query-filter.png" alt="Cells highlighted by a natural-language query"/>
-</td>
-</tr>
-</table>
-
-<div align="center">
-<br/>
-<b>Large-scale rendering</b>: 827,048 cells (10x Xenium human lung), rendered live in the browser.<br/><br/>
-<img src="nebulacell/docs/images/large-scale.png" alt="827,048 cells from a 10x Xenium human lung dataset rendered in the browser" width="100%"/>
-</div>
 
 <img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
 
@@ -133,6 +98,42 @@ flowchart LR
 <br/>
 
 HDBSCAN is a density-based clustering method. Instead of asking you for the number of clusters up front, it looks for regions where points are packed closely together and treats sparse points as noise. `min_cluster_size` sets the smallest group worth calling a domain, and `min_samples` controls how conservative the density estimate is: higher values mark more points as noise. That is why it suits tissue, where regions have irregular shapes and no fixed count.
+
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
+
+<div align="center">
+<h3>ARCHITECTURE</h3>
+</div>
+
+| Layer | Technology |
+| :--- | :--- |
+| Dashboard / UI | Dash (Plotly) |
+| Rendering | Plotly `Scattergl` (WebGL) |
+| Data handling | Scanpy, AnnData |
+| Spatial data | Squidpy |
+| Clustering | HDBSCAN |
+| NL query parsing | Rule-based regex parser, no external API |
+
+<details>
+<summary><b>Project layout</b></summary>
+
+```text
+nebulacell/
+├── app/
+│   ├── main.py                  Dash app entrypoint, layout, callbacks
+│   ├── data/
+│   │   ├── loader.py            .h5ad loading, in-memory vs backed-mode logic
+│   │   └── image_overlay.py     Histology image extraction (Visium uns['spatial'])
+│   ├── clustering/
+│   │   └── hdbscan_runner.py    Spatial domain clustering, adaptive param scaling
+│   ├── callbacks/
+│   │   └── hover.py             Top-genes-per-cell, gene expression lookups
+│   └── nlquery/
+│       └── parser.py            NL to structured filter parsing + validation
+└── tests/
+```
 
 </details>
 
@@ -213,38 +214,38 @@ Open **http://127.0.0.1:8050** in your browser. NebulaCell starts with a small b
 <img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
 
 <div align="center">
-<h3>ARCHITECTURE</h3>
+<h3>GALLERY</h3>
 </div>
+<a id="gallery"></a>
 
-| Layer | Technology |
-| :--- | :--- |
-| Dashboard / UI | Dash (Plotly) |
-| Rendering | Plotly `Scattergl` (WebGL) |
-| Data handling | Scanpy, AnnData |
-| Spatial data | Squidpy |
-| Clustering | HDBSCAN |
-| NL query parsing | Rule-based regex parser, no external API |
+<table>
+<tr>
+<td width="50%" valign="top" align="center">
+<b>Leiden clusters + histology overlay</b><br/>
+<img src="nebulacell/docs/images/hero.png" alt="Leiden clusters with histology overlay"/>
+</td>
+<td width="50%" valign="top" align="center">
+<b>HDBSCAN spatial domains (827k cells)</b><br/>
+<img src="nebulacell/docs/images/hdbscan-domains.png" alt="HDBSCAN spatial domains on 827k cells"/>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top" align="center">
+<b>Gene expression colouring</b><br/>
+<img src="nebulacell/docs/images/gene-expression.png" alt="Dataset recoloured by gene expression"/>
+</td>
+<td width="50%" valign="top" align="center">
+<b>Natural-language query filtering</b><br/>
+<img src="nebulacell/docs/images/nl-query-filter.png" alt="Cells highlighted by a natural-language query"/>
+</td>
+</tr>
+</table>
 
-<details>
-<summary><b>Project layout</b></summary>
-
-```text
-nebulacell/
-├── app/
-│   ├── main.py                  Dash app entrypoint, layout, callbacks
-│   ├── data/
-│   │   ├── loader.py            .h5ad loading, in-memory vs backed-mode logic
-│   │   └── image_overlay.py     Histology image extraction (Visium uns['spatial'])
-│   ├── clustering/
-│   │   └── hdbscan_runner.py    Spatial domain clustering, adaptive param scaling
-│   ├── callbacks/
-│   │   └── hover.py             Top-genes-per-cell, gene expression lookups
-│   └── nlquery/
-│       └── parser.py            NL to structured filter parsing + validation
-└── tests/
-```
-
-</details>
+<div align="center">
+<br/>
+<b>Large-scale rendering</b>: 827,048 cells (10x Xenium human lung), rendered live in the browser.<br/><br/>
+<img src="nebulacell/docs/images/large-scale.png" alt="827,048 cells from a 10x Xenium human lung dataset rendered in the browser" width="100%"/>
+</div>
 
 <img src="https://capsule-render.vercel.app/api?type=rect&height=4&color=0:020617,50:1D4ED8,100:020617" alt="" width="100%"/>
 
