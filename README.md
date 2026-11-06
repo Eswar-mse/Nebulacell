@@ -352,6 +352,6 @@ If NebulaCell helps your research, please cite it:
 </div>
 
 **Sri Venkata Satya Sai Eswar Moparti**, author and maintainer of NebulaCell.<br>
-[Portfolio](https://eswar-mse.github.io) · [ORCID 0009-0005-4635-7368](https://orcid.org/0009-0005-4635-7368) · [GitHub @Eswar-mse](https://github.com/Eswar-mse)
+[Portfolio](https://sai-eswar-porfolio.netlify.app) · [ORCID 0009-0005-4635-7368](https://orcid.org/0009-0005-4635-7368) · [GitHub @Eswar-mse](https://github.com/Eswar-mse)
 
 If NebulaCell saves you time, a :star: on GitHub helps other researchers find it. Released under the [MIT license](LICENSE).
